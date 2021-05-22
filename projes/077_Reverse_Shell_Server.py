@@ -1,6 +1,6 @@
 import socket
 
-host="192.168.1.37"
+host=""
 port=15555
 s=socket.socket() 
 
@@ -8,7 +8,7 @@ def bagla():
     try:
         s.bind((host,port))
 
-        s.listen()
+        s.listen(5)
 
     except:
         print("Bağlantı hatası")
@@ -31,6 +31,7 @@ def komut_yolla(baglanti):
         cmd=input("What's your code?")
 
         if cmd=="quit":
+            baglanti.send("a".encode("utf-8"))
             break
 
         if len(cmd)>0:
