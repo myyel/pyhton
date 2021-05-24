@@ -25,7 +25,7 @@ def kabul_et():
         try:            
              baglanti,adres=s.accept()
              baglanti_listesi.append(baglanti)
-             adresadres_listesi.append(adres)
+             adres_listesi.append(adres)
         except:
             print("bağlantı hatası")
 
@@ -36,7 +36,7 @@ def ana_shell():
         print("Lütfen komut giriniz")
         komut=input("komut: ")
 
-        if komut == "1":
+        if komut == "sirala":
             sırala()
         elif "baglan" in komut:
             try:
@@ -63,15 +63,14 @@ def ana_shell():
 
 
 def sırala():
-    for index, baglanti in enumarate(baglanti_listesi):
+    for index, baglanti in enumerate(baglanti_listesi):
         try:
-            baglanti.send(b" ")
+            baglanti.send(b" ".encode("utf-8"))
             baglanti.recv(1024)
         except:
             baglanti_listesi.pop(index)
             adres_listesi.pop(index)
             continue
-
 
         print(str(index)+"      "+adres_listesi[index][0]+"     "+str(adres_listesi[index][1]))
 
